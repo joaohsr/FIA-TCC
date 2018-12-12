@@ -55,7 +55,7 @@ def obterPropostas(dataInicio, dataFim):
     headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
 
     requestPropostas = {
-        "credenciais": {"codigoAssociado": 46, "senha": "abcd@1234"},
+        "credenciais": {"codigoAssociado": 00, "senha": "pw"},
         # caso seja necessário recuperar as propostas de uma política específica, adicionar a tag abaixo
         # "nomePolitica": "AVANTICARD_P1",
         "instanteInicio": dataInicio,
@@ -152,7 +152,7 @@ def obterVariaveisPropostas(dfPropostas, qtdPropostasAPI=20):
             listaCodigos = df['codigoOperacao'].tolist()
 
             requestVariaveis = {
-                "credenciais": {"codigoAssociado": 46, "senha": "abcd@1234"},
+                "credenciais": {"codigoAssociado": 00, "senha": "pw"},
                 "codigoOperacao": listaCodigos}
             headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
 
@@ -310,17 +310,17 @@ def connODBC(bd):
     try:
         if bd == 'sqlserver':
             # produção
-            return pyodbc.connect('DRIVER={ODBC Driver 13 for SQL Server};SERVER=172.16.6.57;DATABASE=CAEDU_BI;UID=LGN_BI;PWD=H6*jE@ª5fq87')
+            return pyodbc.connect('DRIVER={ODBC Driver 13 for SQL Server};SERVER=127.0.0.1;DATABASE=DW;UID=DW;PWD=DW')
 
             # homologação
-            #return pyodbc.connect('DRIVER={ODBC Driver 13 for SQL Server};SERVER=172.16.25.15;DATABASE=CAEDU_BI;UID=LGN_BI;PWD=H6*jE@ª5fq87')
+            #return pyodbc.connect('DRIVER={ODBC Driver 13 for SQL Server};SERVER=127.0.0.1;DATABASE=DW;UID=DW;PWD=DW')
 
         elif bd == 'oracle':
             # produção
-            return cx_Oracle.connect('caedu/caedu@172.16.6.55/PDVPALMA')
+            return cx_Oracle.connect('DW/DW@127.0.0.1/DW')
 
             # homologação
-            #return cx_Oracle.connect('caedu/caedu@oracledbdev.caedu.com.br/CAEDUDEV')
+            #return cx_Oracle.connect('DW/DW@127.0.0.1/DW')
 
         else:
             sys.exit('Não existe conexão para este banco de dados.')
